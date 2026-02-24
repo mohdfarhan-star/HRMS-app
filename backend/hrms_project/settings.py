@@ -191,18 +191,6 @@ ADMINS = [
     ('Admin', config('ADMIN_EMAIL', default='admin@localhost')),
 ]
 
-# Logging Configuration
-LOG_LEVEL = config('LOG_LEVEL', default='DEBUG' if DEBUG else 'INFO')
-LOG_FILE_PATH = config('LOG_FILE_PATH', default=str(BASE_DIR / 'logs' / 'hrms.log'))
-
-# Create logs directory if it doesn't exist
-try:
-    os.makedirs(os.path.dirname(LOG_FILE_PATH), exist_ok=True)
-except PermissionError:
-    # Fallback to a local logs directory if we can't create the configured path
-    LOG_FILE_PATH = str(BASE_DIR / 'logs' / 'hrms.log')
-    os.makedirs(os.path.dirname(LOG_FILE_PATH), exist_ok=True)
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
