@@ -69,7 +69,7 @@ DATABASE_ENGINE = config('DATABASE_ENGINE', default='django.db.backends.sqlite3'
 
 if DATABASE_ENGINE == 'django.db.backends.postgresql':
     DATABASES = {
-        'default': dj_database_url.parse(os.environment.get("DATABASE_URL"))
+        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
     }
 else:
     # SQLite configuration (default for development)
