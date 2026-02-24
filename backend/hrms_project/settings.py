@@ -68,9 +68,18 @@ WSGI_APPLICATION = 'hrms_project.wsgi.application'
 DATABASE_ENGINE = config('DATABASE_ENGINE', default='django.db.backends.sqlite3')
 
 if DATABASE_ENGINE == 'django.db.backends.postgresql':
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-    }
+    DATABASE_URL = os.environ.get("DATABASE_URL")
+    if DATABASE_URL:
+        DATABASES = {
+            'default': dj_database_url.parse(DATABASE_URL)
+        }
+    else:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / config('DATABASE_NAME', default='db.sqlite3'),
+            }
+        }
 else:
     # SQLite configuration (default for development)
     DATABASES = {
