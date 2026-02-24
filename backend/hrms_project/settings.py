@@ -4,6 +4,7 @@ Environment-based configuration for development and production.
 """
 
 import os
+import dj_database_url
 from pathlib import Path
 from decouple import config, Csv
 
@@ -68,17 +69,7 @@ DATABASE_ENGINE = config('DATABASE_ENGINE', default='django.db.backends.sqlite3'
 
 if DATABASE_ENGINE == 'django.db.backends.postgresql':
     DATABASES = {
-        'default': {
-            'ENGINE': DATABASE_ENGINE,
-            'NAME': config('DATABASE_NAME', default='hrms_db'),
-            'USER': config('DATABASE_USER', default='hrms_user'),
-            'PASSWORD': config('DATABASE_PASSWORD'),
-            'HOST': config('DATABASE_HOST', default='localhost'),
-            'PORT': config('DATABASE_PORT', default='5432'),
-            'OPTIONS': {
-                'connect_timeout': 20,
-            },
-        }
+        'default': dj_database_url.parse(os.environment.get("DATABASE_URL"))
     }
 else:
     # SQLite configuration (default for development)
