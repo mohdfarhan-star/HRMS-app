@@ -1,0 +1,19 @@
+{
+  "name": "hrms-lite",
+  "version": "1.0.0",
+  "description": "A web-based HRMS Lite application for employee and attendance management",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "backend": "cd backend && python manage.py runserver",
+    "frontend": "cd frontend && npm start",
+    "install-all": "cd backend && pip install -r requirements.txt && cd ../frontend && npm install",
+    "setup": "npm run install-all"
+  },
+  "keywords": ["hrms", "employee-management", "attendance", "react", "django"],
+  "author": "HRMS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
